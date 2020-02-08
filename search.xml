@@ -4,13 +4,19 @@
   
     
     <entry>
-      <title>Hello World</title>
-      <link href="/2020/02/08/hello-world/"/>
-      <url>/2020/02/08/hello-world/</url>
+      <title>test</title>
+      <link href="/2020/02/08/test_post/"/>
+      <url>/2020/02/08/test_post/</url>
       
-        <content type="html"><![CDATA[<p>这是一个Hello world文件</p>]]></content>
+        <content type="html"><![CDATA[<p>Hello, world.</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> hello, world </tag>
+            
+        </tags>
       
     </entry>
     
