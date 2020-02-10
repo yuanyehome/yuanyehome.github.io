@@ -4,17 +4,17 @@
   
     
     <entry>
-      <title>test</title>
-      <link href="/2020/02/08/test_post/"/>
-      <url>/2020/02/08/test_post/</url>
+      <title>Ubuntu安装Windows10双系统</title>
+      <link href="/2020/02/10/ubuntu_install_win10/"/>
+      <url>/2020/02/10/ubuntu_install_win10/</url>
       
-        <content type="html"><![CDATA[<p>Hello, world.</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>因为在学校的时候有台式机装着Win10作为主力机，作为日常工作<del>（打游戏）</del>用，自己的笔记本SSD又小，因此就把自己的笔记本上Win10卸载了，装了Ubuntu作为笔记本的主力系统。然而回到家之后因为万恶的病毒被困在了家里，Ubuntu不支持网课软件，不得已又需要把Windows装回来。Win装Ubuntu双系统的教程一抓一大把了，反向装回去做法也差不多，无非就是做启动盘=&gt;插入=&gt;安装。这里姑且记录一下遇到的几个小问题。</p><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>第一步当然是下载ISO镜像，然后烧制启动盘。</p><p>Ubuntu上做个启动盘没windows上那么方便，<code>dd</code>命令我也不是很熟悉，一开始先尝试了<code>mkfs.vfat /dev/sdc</code>格式化U盘之后再通过<code>dd</code>命令进行写入，但是莫名其妙卡死了。然后我就去找第三方工具了2333。</p><blockquote><p>不要重复造轮子  –鲁迅</p></blockquote><p>Ubuntu上找到了一个叫<code>woeusb</code>的软件，实际上就是给几个Linux命令提供了图形化界面的参数设置（总之对于我这种不大熟悉shell命令的菜鸡来说舒服多了）。用法和win上的UltraISO差不多。但是在最终刻写完成之后，你应该会发现它报了一个error，这个error实在过于奇妙，它是因为在最后清理垃圾的一个命令因为linux内核更新有一个参数不支持了（它的github上一次commit还是在几个月之前）……但是好在这并不影响启动盘的烧制，这时候启动盘已经做好了，只不过收尾工作似乎出了点问题，github上的issue里大家最后也没讨论出来结果那个报错的一句话到底干了啥……</p><p>所以到这里为止我们的启动盘就做完了！</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装的时候要注意自己的磁盘是GPT分区还是MBR分区，如果是GPT分区的话要在主板设置上打开UEFI启动，通过UEFI启动做好的系统盘。在这个时候我还报了一个小问题就是“Windows检测到EFI系统分区格式化为NTFS”。网上查的好多结果说是GPT分区没设好，然而我又确认了一下我的确是GPT分区+UEFI启动。只得又回到Ubuntu查看一下磁盘状态。Ubuntu18.04自带一个软件叫<code>disks</code>，简直是shell手残党的福音（<code>fdisk</code>相关命令看得我头大）。发现是上次卸载windows的时候它的EFI分区我并没有除掉，把这个分区搞掉，就完事大吉辣！</p><p>（不得不说，即使在机械盘上启动需要两分钟的卡顿windows10也比Ubuntu的桌面来得香，我终于能玩Overwatch啦！！！）</p>]]></content>
       
       
       
         <tags>
             
-            <tag> hello, world </tag>
+            <tag> 装系统记录 </tag>
             
         </tags>
       
