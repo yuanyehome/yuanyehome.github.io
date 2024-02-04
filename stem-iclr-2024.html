@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM: STEM Question Answering</title>
+    <link rel="icon" href="img_new/logo.png" type="image/icon type">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/leaderboard.css">
+    <script src="javascript/index.js" defer></script>
+    <script type="text/javascript" src="javascript/sort-table.js"></script>
+</head>
+
+<body>
+    <div id="nav">
+        <div id="icon">
+            <img src="img_new/logo.png" id="nav-icon">
+            <a class="nav-button" href="https://github.com/yuanyehome/STEM-ICLR-2024"
+                style="margin-left: 2px; font-size: 24px">STEM
+            </a>
+        </div>
+        <div>
+            <a class="nav-button" href="#home">Home</a>
+            <a class="nav-button" href="#dataset">Dataset</a>
+            <a class="nav-button" href="#method">Method</a>
+            <a class="nav-button" href="#leaderboard">Leaderboard</a>
+            <a class="nav-button" href="#code">Code</a>
+            <a class="nav-button" href="https://arxiv.org/">Paper</a>
+        </div>
+    </div>
+
+    <!-- anchor for the home button -->
+    <div id="home" style="position: absolute; top: 0;"></div>
+
+    <!-- banner -->
+    <div id="title">
+        <div id="title-wrapper">
+            <img src="img_new/logo.png" id="title-icon">
+            <p id="title-text">STEM</p>
+        </div>
+        <p id="subtitle-text">
+            Measuring Vision-Language STEM Skills of Neural Models
+            <br><br>
+        </p>
+        <p id="title-padding-bottom">&nbsp;</p>
+    </div>
+
+    <!-- the main body of the page -->
+    <!-- each section uses an empty div as an anchor -->
+    <div id="body">
+        <div class="section">
+            <div id="about" class="anchor"></div>
+            <h1>Introduction</h1>
+            <div id="example-box">
+                <img class="example-img" src="img_new/example2.png" style="width: 90%" alt="STEM">
+            </div>
+            <p align="center">Figure 1: Summary of our dataset and results.</p>
+            <p style="line-height: 150%">
+                We introduce a new challenge to test the STEM skills of neural models. Unlike existing datasets, our dataset requires the understanding of multimodal vision-language information. Our dataset features one of the largest and most comprehensive datasets for the test. It includes 448 skills and 1,073,146 questions spanning all STEM (science, technology, engineering, math) subjects. Compared to existing datasets that often focus on examining expert-level ability, our test includes fundamental skills and questions designed based on the K-12 curriculum. We also add state-of-the-art foundation models such as CLIP and ChatGPT to our test. Results show that the recent model advances only help master a very limited number of lower grade-level skills (2.5% in the third grade) in our dataset. In fact, these models are still well below (averaging 54.7%) the performance of elementary students, not to mention near expert-level performance. To understand and increase the performance on our dataset, we teach the models on a training split of our dataset. Even though we observe improved performance, the model performance remains relatively low compared to average elementary students. To solve STEM problems, we will need novel algorithmic innovations from the community. The code and dataset are available at <a href="https://github.com/yuanyehome/STEM-ICLR-2024" class="ext-link" target="blank">https://github.com/yuanyehome/STEM-ICLR-2024</a> and will be made publicly available.
+            </p>
+
+        </div>
+
+        <!-- <hr> -->
+        <div class="section">
+            <div id="dataset" class="anchor"></div>
+            <h1>STEM Dataset</h1>
+            <p>
+                We create a massive dataset, called <i>STEM</i>, to test the STEM problem solving abilities. Unlike existing benchmarks, <i>STEM</i> features a large-scale multimodal dataset covering all STEM subjects spanning science, technology, engineering, and mathematics. We collected 1,073,146 multi-choice questions in total. Example questions are shown in Figure 1(a). Moreover, <i>STEM</i> provides a comprehensive STEM skill set containing 448 skills across the subjects. Figure 2 shows example STEM skills in our dataset.
+            </p>
+            <p>
+                <i>STEM</i> is the first large-scale mulitmodal STEM dataset. As shown in Figure 1(a), <i>STEM</i> provides the largest number of questions and skills among existing STEM related datasets. Compared to the previous largest multimodal STEM datasets, <i>STEM</i> is about 10 times larger in terms of the number of questions. Compared to previous datasets, <i>STEM</i> offers the most thorough fundamental skill and question set ranging from pre-K to eighth grade. Compared to datasets of a particular subject, <i>STEM</i> covers all STEM subjects and is at least competitive in terms of the number of questions and skills. For example, <i>STEM</i>'s math subset has 27 times more skills compared to the recent math benchmark <a href="https://arxiv.org/pdf/2110.13214.pdf" class="ext-link" target="blank"><i>IconQA</i></a>.
+            </p>
+            <div id="example-box">
+                <img class="example-img" src="img_new/skills-sample2.png" style="width: 60%" alt="skills-sample.png" />
+            </div>
+            <p align="center">Figure 2: A summary of <i>STEM</i> skills.</p>
+        </div>
+
+        <!-- <hr> -->
+        <div class="section">
+            <div id="method" class="anchor"></div>
+            <h1>Method</h1>
+            <p>
+                We benchmark both state-of-the-art multimodal (vision-language) models (e.g., CLIP) and language models (e.g., GPT-3 and ChatGPT) on the <i>STEM</i>. Figure 3 shows examples for the zero-shot evaluation.
+            </p>
+
+            <div id="example-box">
+                <img class="example-img" src="img_new/task_formalization2.png" style="width: 90%" alt="task_formalization.png" />
+            </div>
+            <!-- <p align="center"><font size="3">(a) CLIP</font></p> -->
+            <!-- <div id="example-box"> -->
+                <!-- <img class="example-img" src="img_new/task_formalization-gpt.png" style="width: 80%" alt="task_formalization-gpt.png" /> -->
+            <!-- </div> -->
+            <!-- <p align="center"> <font size="3">(b) GPT-3 </font></p> -->
+            <p align="center">Figure 3: Zero-shot model setups.</p>
+        </div>
+        
+        <!-- <hr> -->
+        <div class="section">
+            <div id="leaderboard" class="anchor"></div>
+            <h1>Leaderboard</h1>
+            <p>
+                The leaderboard for zero-shot evaluation of different methods on the <strong>test</strong> split.
+            </p>
+
+            <!-- https://www.cssscript.com/sort-table-header-column/ -->
+            <table class="js-sort-table" id="results">
+                <tr>
+                    <td class="js-sort-number"><strong>Rank</strong></td>
+                    <td class="js-sort-number"><strong>Method</strong></td>
+                    <td class="js-sort-number"><strong>Source</strong></td>
+                    <td class="js-sort-number"><strong>Science</strong></td>
+                    <td class="js-sort-number"><strong>Technology</strong></td>
+                    <td class="js-sort-number"><strong>Engineering</strong></td>
+                    <td class="js-sort-number"><strong>Math</strong></td>
+                    <td class="js-sort-number"><strong><u>Average</u></strong></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td style="text-align: left;"><strong>CLIP</strong> (ViT-L/14@336px) </td>
+                    <td><a href="http://proceedings.mlr.press/v139/radford21a/radford21a.pdf" class="ext-link" target="blank">(Radford et al., 2021)</a></td>
+                    <td>50.3</td>
+                    <td>68.7</td>
+                    <td>55.1</td>
+                    <td>43.6</td>
+                    <td><strong>54.4</strong></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td style="text-align: left;">ChatGPT</td>
+                    <td><a href="https://arxiv.org/pdf/2203.02155.pdf" class="ext-link" target="blank">(Ouyang et al., 2022)</a></td>
+                    <td>50.1</td>
+                    <td>26.3</td>
+                    <td>74.6</td>
+                    <td>45.0</td>
+                    <td>49.0</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td style="text-align: left;">GPT-3</td>
+                    <td><a href="https://proceedings.neurips.cc/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf" class="ext-link" target="blank">(Brown et al., 2020)</a></td>
+                    <td>47.1</td>
+                    <td>22.1</td>
+                    <td>73.5</td>
+                    <td>44.0</td>
+                    <td>46.7</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td style="text-align: left;">UNITER</td>
+                    <td><a href="https://link.springer.com/chapter/10.1007/978-3-030-58577-8_7" class="ext-link" target="blank">(Chen et al., 2020)</a></td>
+                    <td>50.8</td>
+                    <td>34.6</td>
+                    <td>55.1</td>
+                    <td>43.2</td>
+                    <td>45.9</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td style="text-align: left;">UnifiedQA (Base)</td>
+                    <td><a href="https://aclanthology.org/2020.findings-emnlp.171.pdf" class="ext-link" target="blank">(Khashabi et al., 2020)</a></td>
+                    <td>42.6</td>
+                    <td>28.8</td>
+                    <td>55.4</td>
+                    <td>40.0</td>
+                    <td>41.7</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td style="text-align: left;">ViLBERT</td>
+                    <td><a href="https://proceedings.neurips.cc/paper/2019/file/c74d97b01eae257e44aa9d5bade97baf-Paper.pdf" class="ext-link" target="blank">(Lu et al., 2019)</a></td>
+                    <td>39.0</td>
+                    <td>32.1</td>
+                    <td>44.2</td>
+                    <td>42.7</td>
+                    <td>39.5</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td style="text-align: left;">12-in-1</td>
+                    <td><a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Lu_12-in-1_Multi-Task_Vision_and_Language_Representation_Learning_CVPR_2020_paper.pdf" class="ext-link" target="blank">(Lu et al., 2020)</a></td>
+                    <td>39.4</td>
+                    <td>27.5</td>
+                    <td>44.2</td>
+                    <td>41.9</td>
+                    <td>38.3</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td style="text-align: left;">VirTex</td>
+                    <td><a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Desai_VirTex_Learning_Visual_Representations_From_Textual_Annotations_CVPR_2021_paper.pdf" class="ext-link" target="blank">(Desai and Johnson, 2021)</a></td>
+                    <td>37.5</td>
+                    <td>24.0</td>
+                    <td>48.1</td>
+                    <td>38.9</td>
+                    <td>37.1</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td style="text-align: left;">Random Guesses</td>
+                    <td>-</td>
+                    <td>38.6</td>
+                    <td>25.0</td>
+                    <td>44.9</td>
+                    <td>39.1</td>
+                    <td>36.9</td>
+                </tr>
+            </table>
+        </div>
+         <!-- <hr> -->
+        <div class="section">
+            <div id="code" class="anchor"></div>
+            <h1>Code</h1>
+            <p>
+                View on the <a href="https://github.com/yuanyehome/STEM-ICLR-2024" class="ext-link" target="blank">https://github.com/yuanyehome/STEM-ICLR-2024</a>.
+            </p>
+        </div>
+
+        <!-- <hr> -->
+    </div>
+</body>
+
+</html>
