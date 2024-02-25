@@ -312,3 +312,76 @@ li {
 #tasks tr:hover {
     background-color: #ddd;
 }
+
+button, input[type="submit"] {
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 10%;
+}
+
+#uploadBtn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#uploadBtn:hover {
+    background-color: #45a049;
+}
+
+#cancelBtn {
+    background-color: #808080; /* Gray */
+    color: white;
+}
+
+#cancelBtn:hover {
+    background-color: #696969;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#uploadForm {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    transform: translateY(100%);
+    transition: transform 0.5s;
+}
+#uploadForm.show {
+    transform: translateY(0);
+}
+
+#uploadForm div {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 35%;
+}
+
+input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}

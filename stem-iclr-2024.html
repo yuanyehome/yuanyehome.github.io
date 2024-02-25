@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/leaderboard.css">
-    <script src="javascript/index.js" defer></script>
     <script type="text/javascript" src="javascript/sort-table.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
@@ -93,11 +93,6 @@
             <div id="example-box">
                 <img class="example-img" src="img_new/task_formalization2.png" style="width: 90%" alt="task_formalization.png" />
             </div>
-            <!-- <p align="center"><font size="3">(a) CLIP</font></p> -->
-            <!-- <div id="example-box"> -->
-                <!-- <img class="example-img" src="img_new/task_formalization-gpt.png" style="width: 80%" alt="task_formalization-gpt.png" /> -->
-            <!-- </div> -->
-            <!-- <p align="center"> <font size="3">(b) GPT-3 </font></p> -->
             <p align="center">Figure 3: Zero-shot model setups.</p>
         </div>
         
@@ -108,6 +103,83 @@
             <p>
                 The leaderboard for zero-shot evaluation of different methods on the <strong>test</strong> split. You can submit your results to the leaderboard by uploading your predictions on the test split. Here is an example of the submission format: <a href="files/zero_preds.json" class="example-pred" target="blank" download>all_zero_preds.json</a>
             </p>
+
+
+            <button id="uploadBtn"><strong>Upload</strong></button>
+
+            <form id="uploadForm" action="http://47.245.81.55:10086/eval-stem" method="post">
+              <div>
+                <label for="name"><strong>Name (required):</strong></label><br>
+                <input type="text" id="name" name="name" required><br>
+                <label for="name"><strong>Source:</strong></label><br>
+                <input type="text" id="source" name="source"><br>
+                <label for="file"><strong>File (required):</strong></label><br>
+                <input type="file" id="file" name="file" required><br>
+                <button type="button" id="cancelBtn">Cancel</button>
+                <input type="submit" value="Submit">
+              </div>
+            </form>
+
+            <script>
+                var uploadBtn = document.getElementById('uploadBtn');
+                var cancelBtn = document.getElementById('cancelBtn');
+                var uploadForm = document.getElementById('uploadForm');
+
+                uploadBtn.addEventListener('click', function() {
+                    uploadForm.style.display = 'block';
+                    setTimeout(function() {
+                        uploadForm.classList.add('show');
+                    }, 0);
+                });
+
+                cancelBtn.addEventListener('click', function() {
+                    uploadForm.classList.remove('show');
+                    setTimeout(function() {
+                        uploadForm.style.display = 'none';
+                    }, 500);
+                });
+            
+                window.onclick = function(event) {
+                    if (event.target == uploadForm) {
+                        uploadForm.classList.remove('show');
+                        setTimeout(function() {
+                            uploadForm.style.display = 'none';
+                        }, 500);
+                    }
+                };
+
+                uploadForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    var name = document.getElementById('name').value;
+                    var source = document.getElementById('source').value;
+                    var file = document.getElementById('file').files[0];
+                    var maxSize = 45 * 1024 * 1024; // 5MB in bytes
+                    if (file.size > maxSize) {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'File size should not exceed 45MB. Got ' + 
+                                (file.size / 1024 / 1024).toFixed(2) + ' MB.',
+                            showConfirmButton: true
+                        })
+                        uploadForm.reset();
+                    }
+                    else {
+                        console.log('Hello World');
+                        console.log('Name:', name);
+                        console.log('Source:', source);
+                        console.log('File:', file);
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'Submitted!',
+                            showConfirmButton: true
+                        })
+                        setTimeout(function() {
+                            uploadForm.style.display = 'none';
+                        }, 500);
+                    }
+                });
+            </script>
+
 
             <!-- https://www.cssscript.com/sort-table-header-column/ -->
             <table class="js-sort-table" id="results">
