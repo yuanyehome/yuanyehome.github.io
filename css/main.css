@@ -242,6 +242,10 @@ li {
     /* text-decoration: underline; */
 }
 
+.example-pred {
+    color: #007bff;
+}
+
 #cc-img {
     --width: 40%;
     width: var(--width);
