@@ -101,7 +101,7 @@
             <div id="leaderboard" class="anchor"></div>
             <h1>Leaderboard</h1>
             <p>
-                The leaderboard for zero-shot evaluation of different methods on the <strong>test</strong> split. You can submit your results to the leaderboard by uploading your predictions on the test split. Here is an example of the submission format: <a href="files/zero_preds.json" class="example-pred" target="blank" download>all_zero_preds.json</a>
+                The leaderboard for zero-shot evaluation of different methods on the <strong>test</strong> split. You can submit your results to the leaderboard by uploading your predictions on the test split. Here is an example of the submission format: <a href="files/zero_preds.json" class="example-pred" target="blank" download>all_zero_preds.json</a>. It will take several seconds to minutes to evaluate your submission and please do not leave this page before getting the scores. The leaderboard will be updated every day.
             </p>
 
 
@@ -109,12 +109,15 @@
             <div id="loading" style="display: none;">Loading...</div> -->
             <div style="display: flex; align-items: center;">
                 <button id="uploadBtn"><strong>Upload</strong></button>
-                <div id="loading" style="display: none; font-size: 20px; margin-left: 20px;">Loading...</div>
+                <div id="loading" style="display: none; font-size: 20px; margin-left: 20px;">
+                    <strong>Evaluating...</strong>
+                </div>
             </div>
+            <div id="resultShow" style="display: none; font-size: 16px;"></div>
 
             <form id="uploadForm" action="http://47.245.81.55:10086/eval-stem" method="post">
               <div>
-                <label for="name"><strong>Name (required):</strong></label><br>
+                <label for="name"><strong>Method (required):</strong></label><br>
                 <input type="text" id="name" name="name" required><br>
                 <label for="name"><strong>Source:</strong></label><br>
                 <input type="text" id="source" name="source"><br>
@@ -174,28 +177,48 @@
                         formData.append('source', source);
                         formData.append('file', file);
                         var loading = document.getElementById('loading');
+                        var resultShow = document.getElementById('resultShow');
                         loading.style.display = 'block';
-                        fetch('http://localhost:12306/eval-stem', {
+                        fetch('http://47.245.81.55:12306/eval-stem', {
                             method: 'POST',
                             body: formData
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data);
+                            data['Method'] = name;
+                            data['Source'] = source;
+                            result_text = JSON.stringify(
+                                data,
+                                ["Method", "Source", "Average",
+                                 "Science", "Technology",
+                                 "Engineering", "Math"],
+                                2
+                            )
                             Swal.fire({
-                                icon: 'success',
-                                text: 'Submitted!',
-                                showConfirmButton: true
+                                icon: 'info',
+                                text: result_text,
+                                showConfirmButton: true,
+                                width: '1000px'
                             });
+                            uploadForm.reset();
                             loading.style.display = 'none';
+                            resultShow.style.display = 'block';
+                            resultShow.innerHTML = "<strong>Your result:</strong><pre>\n" + result_text + "</pre>";
                         })
                         .catch(error => {
+                            console.log(error)
                             Swal.fire({
                                 icon: 'error',
                                 text: "Failed to upload the file.",
                                 showConfirmButton: true
                             })
                             loading.style.display = 'none';
+                        });
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'Submitted!',
+                            showConfirmButton: true,
+                            timer: 5000,
                         });
                         setTimeout(function() {
                             uploadForm.style.display = 'none';
