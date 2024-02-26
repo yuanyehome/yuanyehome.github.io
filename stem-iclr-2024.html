@@ -105,7 +105,12 @@
             </p>
 
 
-            <button id="uploadBtn"><strong>Upload</strong></button>
+            <!-- <button id="uploadBtn"><strong>Upload</strong></button>
+            <div id="loading" style="display: none;">Loading...</div> -->
+            <div style="display: flex; align-items: center;">
+                <button id="uploadBtn"><strong>Upload</strong></button>
+                <div id="loading" style="display: none; font-size: 20px; margin-left: 20px;">Loading...</div>
+            </div>
 
             <form id="uploadForm" action="http://47.245.81.55:10086/eval-stem" method="post">
               <div>
@@ -164,15 +169,34 @@
                         uploadForm.reset();
                     }
                     else {
-                        console.log('Hello World');
-                        console.log('Name:', name);
-                        console.log('Source:', source);
-                        console.log('File:', file);
-                        Swal.fire({
-                            icon: 'success',
-                            text: 'Submitted!',
-                            showConfirmButton: true
+                        var formData = new FormData();
+                        formData.append('name', name);
+                        formData.append('source', source);
+                        formData.append('file', file);
+                        var loading = document.getElementById('loading');
+                        loading.style.display = 'block';
+                        fetch('http://localhost:12306/eval-stem', {
+                            method: 'POST',
+                            body: formData
                         })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Submitted!',
+                                showConfirmButton: true
+                            });
+                            loading.style.display = 'none';
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                text: "Failed to upload the file.",
+                                showConfirmButton: true
+                            })
+                            loading.style.display = 'none';
+                        });
                         setTimeout(function() {
                             uploadForm.style.display = 'none';
                         }, 500);
