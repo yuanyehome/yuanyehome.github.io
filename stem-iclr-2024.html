@@ -119,8 +119,10 @@
               <div>
                 <label for="name"><strong>Method (required):</strong></label><br>
                 <input type="text" id="name" name="name" required><br>
-                <label for="name"><strong>Source:</strong></label><br>
+                <label for="name"><strong>Source Description:</strong></label><br>
                 <input type="text" id="source" name="source"><br>
+                <label for="name"><strong>Source Link:</strong></label><br>
+                <input type="text" id="source-link" name="source-link"><br>
                 <label for="file"><strong>File (required):</strong></label><br>
                 <input type="file" id="file" name="file" required><br>
                 <button type="button" id="cancelBtn">Cancel</button>
@@ -160,6 +162,7 @@
                     event.preventDefault();
                     var name = document.getElementById('name').value;
                     var source = document.getElementById('source').value;
+                    var sourceLink = document.getElementById('source-link').value;
                     var file = document.getElementById('file').files[0];
                     var maxSize = 45 * 1024 * 1024; // 5MB in bytes
                     if (file.size > maxSize) {
@@ -175,21 +178,26 @@
                         var formData = new FormData();
                         formData.append('name', name);
                         formData.append('source', source);
+                        formData.append('source_link', sourceLink);
                         formData.append('file', file);
                         var loading = document.getElementById('loading');
                         var resultShow = document.getElementById('resultShow');
                         loading.style.display = 'block';
-                        fetch('http://47.245.81.55:12306/eval-stem', {
+                        fetch('http://182.92.156.188:12306/eval-stem', {
                             method: 'POST',
                             body: formData
                         })
                         .then(response => response.json())
                         .then(data => {
                             data['Method'] = name;
-                            data['Source'] = source;
+                            for (var key in data) {
+                                if (typeof data[key] === 'number') {
+                                    data[key] = data[key].toFixed(1);
+                                }
+                            }
                             result_text = JSON.stringify(
                                 data,
-                                ["Method", "Source", "Average",
+                                ["Method", "Average",
                                  "Science", "Technology",
                                  "Engineering", "Math"],
                                 2
@@ -218,7 +226,7 @@
                             icon: 'success',
                             text: 'Submitted!',
                             showConfirmButton: true,
-                            timer: 5000,
+                            timer: 2000,
                         });
                         setTimeout(function() {
                             uploadForm.style.display = 'none';
